@@ -4,6 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const helmet = require('helmet');
+const exphbs = require('express-handlebars');
 
 var indexRouter = require('./routes/index');
 
@@ -11,7 +12,7 @@ var app = express();
 app.use(helmet());
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
+app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'hbs');
 
 app.use(logger('dev'));
