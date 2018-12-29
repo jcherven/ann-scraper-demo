@@ -1,10 +1,18 @@
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
-var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const helmet = require('helmet');
 const exphbs = require('express-handlebars');
+
+const mongoose = require('mongoose');
+const axios = require('axios');
+const cheerio = require('cheerio');
+
+const db = require('./models');
+
+// If deployed, use the deployed database. Otherwise use the local mongoHeadlines database
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/annStories";
 
 var indexRouter = require('./routes/index');
 
@@ -17,11 +25,12 @@ app.set('view engine', 'hbs');
 
 app.use(logger('dev'));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
+app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
+
+mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
