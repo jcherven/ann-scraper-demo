@@ -15,19 +15,19 @@ const db = require( './models' );
 var app = express();
 app.use( helmet() );
 
-// view engine setup
+// View Engine Setup
 app.engine( 'handlebars', exphbs( { defaultLayout: 'main' } ) );
 app.set( 'view engine', 'hbs' );
 
-// Middleware
+// Middleware Config
 app.use( logger( 'dev' ) );
 app.use( express.json() );
 app.use( express.urlencoded( { extended: true } ) );
 app.use( express.static( path.join( __dirname, 'public' ) ) );
 
-// Route handling
+// Route Handling Config
 const indexRouter = require( './routes/index-route' );
-const scrapeRouter = require('./routes/fetch-route');
+const scrapeRouter = require('./routes/scrape-route');
 
 app.use( '/', indexRouter );
 app.use( '/', scrapeRouter );

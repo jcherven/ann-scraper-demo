@@ -3,7 +3,7 @@ const axios = require('axios');
 const cheerio = require('cheerio');
 const router = express.Router();
 
-router.get("/fetch-new", (req, res) => {
+router.get("/scrape", (req, res) => {
     console.log("\n***********************************\n" +
                 "Fetching the front page of ANN News" +
                 "\n***********************************\n");
@@ -48,7 +48,7 @@ router.get("/fetch-new", (req, res) => {
             console.log(newsItem.link);
             console.log("\n");
         });
-        res.redirect('/');
+        res.send("Scrape Complete");
     });
 });
 
