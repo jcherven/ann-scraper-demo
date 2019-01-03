@@ -26,7 +26,7 @@ app.use( express.urlencoded( { extended: true } ) );
 app.use( express.static( path.join( __dirname, 'public' ) ) );
 
 // Route handling
-const indexRouter = require( './routes/index' );
+const indexRouter = require( './routes/index-route' );
 const scrapeRouter = require('./routes/fetch-route');
 
 app.use( '/', indexRouter );
