@@ -48,6 +48,7 @@ router.get("/fetch-new", (req, res) => {
             console.log(newsItem.link);
             console.log("\n");
         });
+        res.redirect('/');
     });
 });
 

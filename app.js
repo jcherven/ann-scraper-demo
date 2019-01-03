@@ -11,7 +11,6 @@ const cheerio = require( 'cheerio' );
 
 const db = require( './models' );
 
-var indexRouter = require( './routes/fetch-route' );
 
 var app = express();
 app.use( helmet() );
@@ -20,12 +19,18 @@ app.use( helmet() );
 app.engine( 'handlebars', exphbs( { defaultLayout: 'main' } ) );
 app.set( 'view engine', 'hbs' );
 
+// Middleware
 app.use( logger( 'dev' ) );
 app.use( express.json() );
 app.use( express.urlencoded( { extended: true } ) );
 app.use( express.static( path.join( __dirname, 'public' ) ) );
 
+// Route handling
+const indexRouter = require( './routes/index' );
+const scrapeRouter = require('./routes/fetch-route');
+
 app.use( '/', indexRouter );
+app.use( '/', scrapeRouter );
 
 // If deployed, use the deployed database. Otherwise use the local mongoHeadlines database
 var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/annStories";
