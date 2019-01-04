@@ -22,7 +22,10 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static('public'));
 
-mongoose.connect("mongodb://localhost/annscraperNonmodular", { useNewUrlParser: true });
+// If deployed, use the deployed database. Otherwise use the local mongoHeadlines database
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/annScraperDemo";
+
+mongoose.connect(MONGODB_URI);
 
 app.get("/scrape", function(req, res) {
     const baseUrl = "https://www.animenewsnetwork.com";
