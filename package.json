@@ -18,5 +18,19 @@
     "http-errors": "~1.6.2",
     "mongoose": "^5.4.1",
     "morgan": "~1.9.0"
-  }
+  },
+  "main": "index.js",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jcherven/ann-scraper-demo.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jcherven/ann-scraper-demo/issues"
+  },
+  "homepage": "https://github.com/jcherven/ann-scraper-demo#readme",
+  "description": ""
 }

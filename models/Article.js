@@ -29,17 +29,14 @@ let ArticleSchema = new Schema({
     },
     imageLink: {
         type: String
+    },
+    note: {
+        type: Schema.Types.ObjectId,
+        ref: "Note"
     }
 });
 
-let Article = mongoose.model("Article", ArticleSchema);
+var Article = mongoose.model('Article', ArticleSchema);
 
-module.exports = NewsItem;
-
-//  articleId: articleId,
-//  title: title,
-//  imageLink: imageLink,
-//  byLine: byLine,
-//  link: link,
-//  subhead: subhead,
-//  previewText: previewText
+module.exports = Article;
+    
