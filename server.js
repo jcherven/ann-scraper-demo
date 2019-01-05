@@ -2,12 +2,10 @@ const express = require('express');
 const logger = require('morgan');
 const mongoose = require('mongoose');
 const exphbs = require('express-handlebars');
-
 const axios = require('axios');
 const cheerio = require('cheerio');
 
 const db = require('./models');
-
 const PORT = process.env.PORT || 3000;
 
 const app = express();
@@ -22,10 +20,11 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static('public'));
 
-// If deployed, use the deployed database. Otherwise use the local mongoHeadlines database
+// If deployed, use the deployed database. Otherwise use the local database
 var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/annScraperDemo";
-
-mongoose.connect(MONGODB_URI);
+mongoose.connect(MONGODB_URI, {useNewUrlParser: true });
+// Silence a Mongoose deprecation warning
+mongoose.set('useCreateIndex', true);
 
 app.get("/scrape", function(req, res) {
     const baseUrl = "https://www.animenewsnetwork.com";
